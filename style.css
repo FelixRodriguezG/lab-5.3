@@ -1,0 +1,143 @@
+@import url(https://fonts.googleapis.com/css?family=Exo+2:200i);
+@import url('https://fonts.googleapis.com/css2?family=Stalinist+One&display=swap');
+
+:root {
+  /* Base font size */
+  font-size: 10px;   
+  
+  --background: #060608;
+  --color-text-glitch: #FAFAFA;
+  /* Set neon color */
+  --neon-text-color: #f40f40;
+  --neon-border-color: #08f;
+}
+
+body {
+  font-family: "Stalinist One", sans-serif;
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;  
+  background: var(--background);
+  min-height: 100vh;  
+  animation: fadeIn 1s ease forwards;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+h1 {
+  font-size: 6rem;
+  font-weight: 200;
+  font-style: italic;
+  color: #fff;
+  padding: 5rem 6rem 4rem 5rem;
+  border: 0.4rem solid #fff;
+  border-radius: 2rem;
+  text-transform: uppercase;
+  animation: flicker 1.5s infinite alternate;     
+}
+
+@keyframes flicker {
+    
+    0%, 19%, 23%, 28%, 34%, 54%, 56%, 100% {
+      
+        text-shadow:
+            -0.2rem -0.2rem 1rem #fff,
+            0.2rem 0.2rem 1rem #fff,
+            0 0 2rem var(--neon-text-color),
+            0 0 4rem var(--neon-text-color),
+            0 0 6rem var(--neon-text-color),
+            0 0 8rem var(--neon-text-color),
+            0 120px 10rem var(--neon-text-color),
+          0 120px 18rem var(--neon-text-color)
+          ;
+        
+        box-shadow:
+            0 0 .5rem #fff,
+            inset 0 0 .5rem #fff,
+            0 0 2rem var(--neon-border-color),
+            inset 0 0 2rem var(--neon-border-color),
+            0 -10px 4rem var(--neon-border-color),
+            inset 0 10px 4rem var(--neon-border-color);        
+    }
+    
+    20%, 24%, 55% {        
+        text-shadow: none;
+        box-shadow: none;
+    }    
+}
+
+.glith {
+  display: grid;
+  grid-template-columns: 1fr;
+  color:var(--color-text-glitch)
+}
+
+.glith span {
+  
+  font-weight: bold;
+  grid-row-start: 1;
+  grid-column-start: 1;
+  font-size: 3rem;
+  --stack-height: calc(100% / var(--stacks) - 1px);
+  --inverse-index: calc(calc(var(--stacks) - 1) - var(--index));
+  --clip-top: calc(var(--stack-height) * var(--index));
+  --clip-bottom: calc(var(--stack-height) * var(--inverse-index));
+  clip-path: inset(var(--clip-top) 0 var(--clip-bottom) 0);
+  animation: stack 340ms cubic-bezier(.46,.29,0,1.24) 1 alternate calc(var(--index) * 120ms), glitch 2s ease infinite 2s alternate-reverse;
+}
+
+@keyframes stack {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%);
+    text-shadow: -2px 3px 0 red, 2px -3px 0 blue;
+  };
+  60% {
+    opacity: 0.5;
+    transform: translateX(50%);
+  }
+  80% {
+    transform: none;
+    opacity: 1;
+    text-shadow: 2px -3px 0 red, -2px 3px 0 blue;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+    text-shadow: -2px 3px 0 red, 2px -3px 0 blue;
+  };
+}
+
+@keyframes glitch {
+  0% {
+    text-shadow: -2px 3px 0 red, 2px -3px 0 blue;
+    transform: translate(var(--glitch-translate));
+  }
+  2% {
+    text-shadow: 2px -3px 0 red, -2px 3px 0 blue;
+  }
+  0% {
+    text-shadow: -2px 3px 0 red, 2px -3px 0 blue;
+    transform: translate(var(--glitch-translate));
+  }
+  2% {
+    text-shadow: 2px -3px 0 red, -2px 3px 0 blue;
+  }
+  10% {
+    text-shadow: -2px 3px 0 red, 2px -3px 0 blue;
+    
+  }
+  16% {
+    text-shadow: 2px -3px 0 red, -2px 3px 0 blue;
+  }
+  
+  
+  
+  4%, 100% {  text-shadow: none; transform: none; }
+}
